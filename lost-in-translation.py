@@ -143,7 +143,7 @@ def main():
             print("Enter the language code to translate into: ")
             processed_lang = controller.get_input()
             translation = translate.process_text(processed_response, processed_lang, "en")
-            print("To translate again, enter another language code, otherwise press Enter. ")
+            print("To translate again, enter another language code, otherwise press Enter. ") # Move this to view.draw, add confirmation
             processed_second_lang = controller.get_input()
             if processed_second_lang != "":
                 translate.process_text(translation, processed_second_lang, processed_lang)
