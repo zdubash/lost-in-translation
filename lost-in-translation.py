@@ -107,7 +107,7 @@ def main():
                 processed_response, processed_lang, "en"
             )
             processed_next_lang = controller.get_input()
-            while processed_next_lang != "":
+            while (processed_next_lang != "" or processed_next_lang != "en"):
                 translation = translate.process_translations(
                     translation, processed_next_lang, processed_lang
                 )

@@ -8,16 +8,30 @@ import translators as ts
 
 from translate import Translator
 
+import apikey
+
 
 def new_translator(phrase, src, dest):
     # uses microsoft for when MyMemory limit has been reached
-    # translator = Translator(provider='microsoft', secret_access_key="bfbfd764b8bd4be9b6b2dd60c369c491", from_lang=src, to_lang=dest)
+    translator = Translator(provider='microsoft', secret_access_key=apikey.key, from_lang=src, to_lang=dest)
 
-    translator = Translator(from_lang=src, to_lang=dest)
+    # translator = Translator(from_lang=src, to_lang=dest)
     return translator.translate(phrase)
 
 
-baiducodes = {"fr": "fra", "ar": "ara", "en": "en", "th": "th", "de": "de", "ja": "jp", "ru": "ru", "nl": "nl", "fi": "fin", "da": "dan", "sv": "swe"}
+baiducodes = {
+    "fr": "fra",
+    "ar": "ara",
+    "en": "en",
+    "th": "th",
+    "de": "de",
+    "ja": "jp",
+    "ru": "ru",
+    "nl": "nl",
+    "fi": "fin",
+    "da": "dan",
+    "sv": "swe",
+}
 
 
 def get_translation(phrase, dest, src):
@@ -35,7 +49,7 @@ def get_translation(phrase, dest, src):
 
     return [
         ts.bing(phrase, src, dest, if_use_cn_host=False),
-        new_translator(phrase, src, dest), 
+        new_translator(phrase, src, dest),
         ts.baidu(phrase, baiducodes[src], baiducodes[dest], sleep_seconds=0.1),
     ]
 
