@@ -1,87 +1,58 @@
-import helpers, time
+import helpers
 
-class ReverseTranslate:
+class LostInTranslation:
     """
     Representation of a translation evaluation engine.
     """
 
     def __init__(self):
         """
-        Create a new ReverseTranslate instance.
+        Create a new LostInTranslation instance.
         """
-        pass
+        self._complete = False
 
-    def complete(self):
+    def set_complete(self, state):
         """
-        Check whether the translation is finished.
-
-        Returns:
-            True if the translation is complete and False otherwise.
+        Set variable complete to either true or false (default false)
         """
-
-        return False
+        self._complete = state
 
     def process_text(self, phrase, dest, src):
         """
         Process given text and translate as necessary.
         """
-
+        print(f"Translating from {src} to {dest}.\n")
         translations = helpers.get_translation(phrase, dest, src)
-        print("Bing: " + translations[0] + "\nAlibaba: " + translations[1] + "\nBaidu: " + translations[2])
+        print(
+            f"Bing: {translations[0]}\nMyMemory: {translations[1]}\nBaidu: {translations[2]}\n"
+        )
         return translations
 
     def process_reverse(self, phrases, src):
         """
         Process given text and translate as necessary.
         """
-
+        print("Translating back to English...\n")
         reverse_translations = helpers.reverse_translation(phrases, src)
-        print("\nBing: " + reverse_translations[0] + "\nAlibaba: " + reverse_translations[1] + "\nBaidu: " + reverse_translations[2])
+        print(
+            f"Bing: {reverse_translations[0]}\nMyMemory: {reverse_translations[1]}\nBaidu: {reverse_translations[2]}\n"
+        )
         return reverse_translations
 
-    def process_translation(self, phrases, dest, src):
+    def process_translations(self, phrases, dest, src):
         """
         Process given text and translate as necessary.
         """
-        pass
-        translations = helpers.get_translation(phrase, dest, src)
-        print("Bing: " + translations[0] + "\nAlibaba: " + translations[1] + "\nBaidu: " + translations[2])
+        print(f"Translating from {src} to {dest}.\n")
+        translations = []
+        i = 0
+        for phrase in phrases:
+            translations.append(helpers.get_translation(phrase, dest, src)[i])
+            i += 1
+        print(
+            f"Bing: {translations[0]}\nMyMemory: {translations[1]}\nBaidu: {translations[2]}\n"
+        )
         return translations
-
-
-class View:
-    """
-    Generic view for Translator.
-
-    Attributes:
-        _translate: a ReverseTranslator instance.
-    """
-
-    def __init__(self, translate):
-        """
-        Create an instance of a View for a translation.
-
-        Args:
-            translate: a ReverseTranslator instance.
-        """
-        self._translate = translate
-
-    def draw(self):
-        """
-        Display the translation to the user.
-        """
-        pass
-
-class TextView(View):
-    """
-    Text-based view for a Reverse Translation.
-    """
-
-    def draw(self):
-        """
-        Print the representation of the game to standard output.
-        """
-        pass
 
 
 class Controller:
@@ -91,67 +62,62 @@ class Controller:
 
     def get_input(self):
         """
-        Translate (ha) input from the user into usable data.
-
-        (either a String to translate, or a char for most useful translation/whether to repeat)
+        Generic input function
         """
         pass
+
 
 class TextController(Controller):
     """
     Text-based controller for a Reverse Translation.
     """
-    # Add static methods here for different print functions.
 
-    def get_input(self):
+    def get_input(
+        self,
+        message="To translate again, enter another language code, otherwise press Enter to translate back to English.\n",
+    ):
         """
-        Process input (blah blah)
+        Process input given a message to provide to user.
+
+        Args:
+            message: a String, presented to the user when taking input
+
+        Returns: stripped user input, in String format
         """
-        user_input = input()
+        user_input = input(message)
         stripped_user_input = user_input.strip()
-        # lang_input = input("Which language code would you like to translate to? ")
-        # stripped_lang_input = lang_input.strip()
-        
-        # return [stripped_user_input, stripped_lang_input]
         return stripped_user_input
 
 
 def main():
     """
-    Run the main game.
-
-    Play a one-player game of Set. In each step of the game, print out the
-    current board and get the player's input. Check this input, and if the
-    player guesses a possible set, check the cards to confirm that this is the
-    case. If the cards form a set, remove them from the board and draw new
-    cards from the deck.
+    Run the Lost in Translation userflow.
     """
-    translate = ReverseTranslate()
-    view = TextView(translate)
+    translate = LostInTranslation()
     controller = TextController()
 
-    while not translate.complete():
+    while not translate._complete:
+        processed_response = controller.get_input("\nEnter a phrase in English here: ")
 
-        # Show the current state of the translation and get the user's inout.
-        view.draw()
-        print("Enter a phrase in English here: ")
-        processed_response = controller.get_input()
-
-        # If the player made a guess, check if the selected cards are a set and
-        # remove them from the board if they are.
         if processed_response is not None:
-            print("Enter the language code to translate into: ")
-            processed_lang = controller.get_input()
-            translation = translate.process_text(processed_response, processed_lang, "en")
-            print("To translate again, enter another language code, otherwise press Enter. ") # Move this to view.draw, add confirmation
-            processed_second_lang = controller.get_input()
-            if processed_second_lang != "":
-                translate.process_text(translation, processed_second_lang, processed_lang)
-            else:
-                translate.process_reverse(translation, processed_lang)
-                break
+            processed_lang = controller.get_input(
+                "\nEnter the language code to translate into: \n[ar, fr, th, de, ja, ru, nl, fi, da, sv]\n"
+            )
+            translation = translate.process_text(
+                processed_response, processed_lang, "en"
+            )
+            processed_next_lang = controller.get_input()
+            while processed_next_lang != "":
+                translation = translate.process_translations(
+                    translation, processed_next_lang, processed_lang
+                )
+                processed_lang = processed_next_lang
+                processed_next_lang = controller.get_input()
 
-    print("Thank you for using ReverseTranslate!")
+            translate.process_reverse(translation, processed_lang)
+            translate.set_complete(True)
+
+    print("Thank you for using LostInTranslation!")
 
 
 if __name__ == "__main__":
