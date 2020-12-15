@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to lost-in-translation.
 
 You can use the [editor on GitHub](https://github.com/zdubash/lost-in-translation/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
