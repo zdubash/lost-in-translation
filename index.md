@@ -29,9 +29,7 @@ We also think we can bring some laughter and joy to those who use it because it 
 
 ### About Us
 
-Zarius and Annie are students at Babson College, graduating in December 2020.
-
-We have enjoyed our time cross-registering at Olin College throughout these past 2 years.
+Zarius and Annie are students at Babson College, graduating in December 2020. We have enjoyed our time cross-registering at Olin College throughout the past 2 years.
 
 This course is the final step in completing each of our Olin College Engineering Certificates with concentrations in the field of Design.
 
