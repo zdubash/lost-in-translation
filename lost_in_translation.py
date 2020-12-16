@@ -9,6 +9,7 @@ Authors: Zarius Dubash, Annie Sheil
 
 import helpers
 
+
 class LostInTranslation:
     """
     Representation of a translation evaluation engine.
@@ -42,7 +43,7 @@ class LostInTranslation:
         translations = helpers.get_translation(phrase, dest, src)
         print(
             f"Bing: {translations[0]}\nMyMemory: {translations[1]}\nBaidu: \
-            {translations[2]}\n"
+{translations[2]}\n"
         )
         return translations
 
@@ -58,7 +59,7 @@ class LostInTranslation:
         reverse_translations = helpers.reverse_translation(phrases, src)
         print(
             f"Bing: {reverse_translations[0]}\nMyMemory: \
-                {reverse_translations[1]}\nBaidu: {reverse_translations[2]}\n"
+{reverse_translations[1]}\nBaidu: {reverse_translations[2]}\n"
         )
         return reverse_translations
 
@@ -79,7 +80,7 @@ class LostInTranslation:
             i += 1
         print(
             f"Bing: {translations[0]}\nMyMemory: {translations[1]}\nBaidu: \
-                {translations[2]}\n"
+{translations[2]}\n"
         )
         return translations
 
@@ -104,7 +105,7 @@ class TextController(Controller):
     def get_input(
         self,
         message="To translate again, enter another language code, otherwise \
-            press Enter to translate back to English.\n"):
+press Enter to translate back to English.\n"):
         """
         Process input given a message to provide to user.
 

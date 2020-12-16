@@ -14,7 +14,8 @@ We consider the entire program a unit test, and as a result these tests simply
 check for errors in accessing translations. We hope you understand.
 """
 
-import pytest, lost_in_translation, helpers
+import pytest
+import helpers
 
 fr_test_phrases = {
     "This is a test": "C'est un test",
@@ -44,6 +45,6 @@ def test_get_translation():
     translations from all three sources (if an error occurred, get_translation
     would crash and not return a list)
     """
-    
+
     for lang in lang_codes:
         assert type(helpers.get_translation("Hello world", "en", lang)) == list
