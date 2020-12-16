@@ -21,6 +21,8 @@ After installing dependencies, as linked in the [README](https://github.com/zdub
 
 Input any phrase, choose the various languages you’d like to use to translate it (one at a time), and watch how some of the words or the meaning may change as it reverts back to English at the end.
 
+![Image](https://github.com/zdubash/lost-in-translation/raw/gh-pages/screen-recorder-tue-dec-15-2020-20-53-28.gif)
+
 ### Unique Features
 
 We think one of the best parts about our project is the way we show how words in various languages can get translated to more commonly used synonyms, and alter the meaning of the sentence.
