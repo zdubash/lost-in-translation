@@ -1,21 +1,32 @@
 """
-A library of helper functions for a translation project.
+A library of helper functions for Lost in Translation, a translation evaluation
+engine and Olin College Software Design final project.
+
+See README for required dependencies.
 
 Authors: Zarius Dubash, Annie Sheil
 """
 
-import translators as ts
+import translators as ts  # pip install translators
+from translate import Translator  # pip install translate
 
-from translate import Translator
+# Insert your email address here:
+user_email = "YOUR_EMAIL_HERE@email.com"
 
-import apikey
 
+def mm_translator(phrase, src, dest):
+    """
+    Get translation from MyMemory translation engine.
 
-def new_translator(phrase, src, dest):
-    # uses microsoft for when MyMemory limit has been reached
-    translator = Translator(provider='microsoft', secret_access_key=apikey.key, from_lang=src, to_lang=dest)
+    Args:
+        phrase: a String, the phrase to be translated
+        src: the language code of the current language of the phrase
+        dest: the language code of the destination language
 
-    # translator = Translator(from_lang=src, to_lang=dest)
+    Returns:
+        a String, the translation of the given phrase
+    """
+    translator = Translator(from_lang=src, to_lang=dest, email=user_email)
     return translator.translate(phrase)
 
 
@@ -49,20 +60,22 @@ def get_translation(phrase, dest, src):
 
     return [
         ts.bing(phrase, src, dest, if_use_cn_host=False),
-        new_translator(phrase, src, dest),
+        mm_translator(phrase, src, dest),
         ts.baidu(phrase, baiducodes[src], baiducodes[dest], sleep_seconds=0.1),
     ]
 
 
 def reverse_translation(phraseList, src):
     """
-    Translate a list of strings back into English using the same translation engine.
+    Translate a list of strings back into English using the same translation
+    engine.
 
     Args:
         phraseList: a List of Strings, the phrases to translate
         src: the language code of the current language of the phrases
 
-    Returns: a List of Strings, the phrases after translation back into English.
+    Returns:
+        a List of Strings, the phrases after translation back into English.
     """
 
     translations = []
@@ -71,8 +84,3 @@ def reverse_translation(phraseList, src):
         translations.append(get_translation(phrase, "en", src)[i])
         i += 1
     return translations
-
-
-# bing: 'en': ['af', 'ar', 'as', 'bn', 'bs', 'bg', 'yue', 'ca', 'zh-Hans', 'zh-Hant', 'hr', 'cs', 'da', 'prs', 'nl', 'en', 'et', 'fj', 'fil', 'fi', 'fr', 'fr-ca', 'de', 'el', 'gu', 'ht', 'he', 'hi', 'mww', 'hu', 'is', 'id', 'ga', 'it', 'ja', 'kn', 'kk', 'tlh-Latn', 'tlh-Piqd', 'ko', 'ku', 'kmr', 'lv', 'lt', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'nb', 'or', 'ps', 'fa', 'pl', 'pt', 'pt-pt', 'pa', 'otq', 'ro', 'ru', 'sm', 'sr-Cyrl', 'sr-Latn', 'sk', 'sl', 'es', 'sw', 'sv', 'ty', 'ta', 'te', 'th', 'to', 'tr', 'uk', 'ur', 'vi', 'cy', 'yua'],
-# alibaba: 'en': ['zh', 'ru', 'es', 'fr', 'ar', 'tr', 'pt', 'th', 'id', 'vi']
-# baidu: 'en': ['zh', 'ara', 'est', 'bul', 'pl', 'dan', 'de', 'ru', 'fra', 'fin', 'kor', 'nl', 'cs', 'rom', 'pt', 'jp', 'swe', 'slo', 'th', 'wyw', 'spa', 'el', 'hu', 'it', 'yue', 'cht', 'vie'],
