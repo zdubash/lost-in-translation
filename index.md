@@ -1,12 +1,25 @@
 ## Welcome to lost-in-translation.
 
-You can use the [editor on GitHub](https://github.com/zdubash/lost-in-translation/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Lost In Translation is an Olin College Software Design Final Project created by Zarius and Annie.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![Image](https://github.com/zdubash/lost-in-translation/blob/gh-pages/litscreenshot.png)
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### The Big Idea
+
+As we both have an interest in languages, and language translation, we felt this game would be the perfect project for us to finish this course. 
+
+We started by creating a program that would compare various language services available (like Google, Bing, etc), and show how various services can translate English phrases differently.  After a bit of thinking, we decided to make this translation service more of a game, because we saw how many phrases were mistranslated when reversed back into English.
+
+We thought it would be interesting to create a chain, and run the same phrase through multiple languages and then finally back into English.
+
+Our project underwent a transformation from a basic translation and comparison service to more of a “Telephone” game, showing how various words within phrases can get swapped out with more commonly used synonyms and therefore, how various phrases can unintentionally have different meanings.
+
+### Usage
+
+After installing dependencies, as linked in the [README](https://github.com/zdubash/lost-in-translation/blob/main/README.md), 
+Input any phrase, choose the various languages you’d like to use to translate it, and watch how some of the words or the meaning may change as it reverts back to English at the end.
+
 
 ```markdown
 Syntax highlighted code block
