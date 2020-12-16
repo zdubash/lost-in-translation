@@ -5,6 +5,7 @@ Welcome to Lost in Translation, a translation evaluation engine and Olin College
 ## Required dependencies:
 * [translators](https://pypi.org/project/translators/): pip install translators
 * [translate](https://pypi.org/project/translate/): pip install translate
+* [node.js](https://nodejs.org/): varies by system, we used [this guide](https://nodejs.org/) to install on Windows Subsystem for Linux
 
 ## Usage:
 * After installing dependencies, download both `lost-in-translation.py` and `helpers.py` from the GitHub Repo.
